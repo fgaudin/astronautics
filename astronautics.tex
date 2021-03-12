@@ -4,6 +4,7 @@
 \usepackage[inter-unit-product=\cdot,per-mode=symbol]{siunitx}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{commath}
 \usepackage{vwcol}
 \usepackage{multicol}
 \usepackage{graphicx}
@@ -11,6 +12,19 @@
 \captionsetup{justification=centering, labelfont=sc, labelsep=endash}
 
 \begin{document}
+\section{Constants}
+\begin{center}
+	\begin{tabular}{|c | c |  c | c |} 
+		\hline
+		Symbol & Name & value & unit \\ [0.5ex] 
+		\hline\hline
+		& Earth radius & 6378.14 & km \\ 
+		\hline
+		$\mu$ & Gravitational parameter & $3.986 \times 10^{14}$ & \si{\meter\cubed\per\second\squared} \\ 
+		\hline
+	\end{tabular}
+\end{center}
+
 \section{Newton's laws of motion}
 \subsection{Newton's first law of motion}
 \begin{multicols}{2}
@@ -236,4 +250,45 @@ R &= \text{magnitude of the spacecraft's position vector (\si{\kilo\meter})}\\
 	\end{align*}
 \end{minipage}
 
+\begin{samepage}
+\begin{multicols}{2}
+	\begin{equation*}
+	\boxed{e = \dfrac{2c}{2a} = \dfrac{R_{a} - R_{p}}{R_{a} + R_{p}}}
+	\end{equation*}
+	
+	\begin{align*}
+	e = eccentricity\\
+	\end{align*}
+	\vfill\null
+	\columnbreak
+	
+	\begin{equation*}
+	\boxed{R = \dfrac{a ( 1 - e^{2})}{1 + e cos \nu}}
+	\end{equation*}
+	
+	\begin{align*}
+	R &= \text{magnitude of the spacecraft's position vector (km)}\\
+	a &= \text{semi-major axis (km)}\\
+	e &= \text{eccentricity (unitless)}\\
+	\nu &= \text{true anomaly (deg or rad)}\\
+	\end{align*}
+	
+\end{multicols}
+\end{samepage}
+
+\begin{center}
+	\begin{tabular}{|c | c | c | c|} 
+		\hline
+		Conic section & a = semimajor axis & c = one half the distance between foci & e = eccentricity \\ [0.5ex] 
+		\hline\hline
+		circle & a $>$ 0 & c = 0 & e = 0 \\ 
+		\hline
+		ellipse & a $>$ 0 & 0 $<$ c $<$ a & 0 $<$ e $<$ 1 \\
+		\hline
+		parabola & a = $\infty$ & c = $\infty$ & e = 1 \\
+		\hline
+		hyperbola & a $<$ 0 & \abs{a} $<$ \abs{c} $>$ 0 & e $>$ 1 \\
+		\hline
+	\end{tabular}
+\end{center}
 \end{document}
