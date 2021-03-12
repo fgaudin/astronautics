@@ -2,6 +2,7 @@
 
 \usepackage[margin=0.5in]{geometry}
 \usepackage[inter-unit-product=\cdot,per-mode=symbol]{siunitx}
+\usepackage{float}
 \usepackage{amsmath}
 \usepackage{vwcol}
 \usepackage{multicol}
@@ -184,8 +185,55 @@ In the absence of outside forces, linear and angular momentum are conserved.
 	\centering
 	\copyrightbox[r]{\includegraphics[width=0.7\linewidth]{img/Ra_and_dec_rectangular}}{\textcopyright By Tfr000 (talk) 19:24, 23 April 2012 (UTC) - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=19193590}
 	\caption{Geocentric equatorial coordinates. The origin is the centre of the Earth. The fundamental plane is the plane of the Earth's equator. The primary direction (the x axis) is the vernal equinox. A right-handed convention specifies a y axis 90° to the east in the fundamental plane; the z axis is the north polar axis. The reference frame does not rotate with the Earth, rather, the Earth rotates around the z axis.}
-	\label{fig:raanddecrectangular}
+	\label{fig:coordinate_system}
 \end{figure*}
 
+
+A coordinate system (figure \ref{fig:coordinate_system}) is:
+\begin{itemize}
+	\item \textbf{an origin}
+	\item \textbf{a fundamental plane}, containing two axes, and the perpendicular to it
+	\item \textbf{a principal direction} within the plane
+	\item \textbf{the third axis} using the right-hand rule
+\end{itemize}
+
+\subsection{Equation of motion}
+\begin{equation*}
+\boxed{\ddot{\vec{R}} + \dfrac{\mu}{R^{2}} \dfrac{\vec{R}}{R} = 0}
+\end{equation*}
+
+\begin{align*}
+\ddot{\vec{R}} &= \text{spacecraft's acceleration (\si{\kilo\meter\per\second\squared})}\\
+\mu &= \text{gravitational parameter (\si{\kilo\meter\cubed\per\second\squared})}\\
+\vec{R} &= \text{spacecraft's position vector (\si{\kilo\meter})}\\
+R &= \text{magnitude of the spacecraft's position vector (\si{\kilo\meter})}\\
+\end{align*}
+
+\subsection{Orbital geometry}
+
+\begin{minipage}{0.6\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{img/ellipse}
+		\caption{Geometry of an elliptical orbit}
+		\label{fig:coordinate_system}
+	\end{figure}
+\end{minipage} \hfill
+\begin{minipage}{0.35\textwidth}
+	\begin{align*}
+	\vec{R} &= \text{spacecraft's position vector}\\
+	\vec{V} &= \text{spacecraft's velocity vector}\\
+	F and F' &= \text{primary and vacant foci}\\
+	R_{p} &= \text{radius of perigee}\\
+	R_{a} &= \text{radius of apogee}\\
+	2a &= \text{major axis}\\
+	2b &= \text{minor axis}\\
+	2c &= \text{distance between the foci}\\
+	a &= \text{semimajor axis}\\
+	b &= \text{semiminor axis}\\
+	\nu &= \text{true anomaly}\\
+	\phi &= \text{flight-path angle}\\
+	\end{align*}
+\end{minipage}
 
 \end{document}
