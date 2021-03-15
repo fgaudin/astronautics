@@ -11,6 +11,14 @@
 \usepackage{caption, copyrightbox}
 \captionsetup{justification=centering, labelfont=sc, labelsep=endash}
 
+\newcommand{\myvarmukm}{\mu &= \text{Gravitational parameter \si{\kilo\meter\cubed\per\sec\squared}} \approx 3.986 \times 10^5 \si{\kilo\meter\cubed\per\second\squared} \text{ for Earth}} 
+
+\newcommand{\myvarv}{V &= \text{spacecraft's velocity (\si{\kilo\meter\per\sec})}}
+
+\newcommand{\myvarepsilon}{\varepsilon &= \text{spacecraft's specific mechanical energy (\si{\kilo\meter\squared\per\second\squared)}}}
+
+\newcommand{\myvara}{a &= \text{semimajor axis (\si{\kilo\meter})}}
+
 \begin{document}
 \section{Constants}
 \begin{center}
@@ -72,19 +80,18 @@ m &= \text{mass (\si{\kilo\gram})}\\
 
 \subsection{Newton's second law of motion}
 \begin{multicols}{2}
-	The time rate of change of an object's momenutm equals the applied force.
+	The time rate of change of an object's momentum equals the applied force.
 	\vfill\null
 	\columnbreak
 	\begin{equation*}
 	\boxed{\vec{F} = m\vec{a}}
 	\end{equation*}
-	
+
 	\begin{align*}
 	\vec{F} &= \text{force vector (\si{\kilo\gram\meter\per\second\squared = \newton})}\\
 	m &= \text{mass (\si{\kilo\gram})}\\
 	\vec{a} &= \text{acceleration  (\si{\meter\per\second\squared})}\\
 	\end{align*}
-	
 \end{multicols}
 
 \subsection{Newton's third law of motion}
@@ -136,14 +143,14 @@ In the absence of outside forces, linear and angular momentum are conserved.
 	KE &= \text{kinetic energy (\si{\kilo\gram\,\meter\squared\per\second\squared)}}\\
 	PE &= \text{potential energy (\si{\kilo\gram\,\meter\squared\per\second\squared)}}\\
 	\end{align*}
-	
+
 	\vfill\null
 	\columnbreak
-	
+
 	\begin{equation*}
 	\boxed{PE = m\,a_{g}h}
 	\end{equation*}
-	
+
 	\begin{align*}
 	m &= \text{mass (\si{\kilo\gram})}\\
 	a_{g} &= \text{acceleration due to gravity (\si{\meter\per\second\squared})}\\
@@ -151,11 +158,11 @@ In the absence of outside forces, linear and angular momentum are conserved.
 	\end{align*}
 	\vfill\null
 	\columnbreak
-	
+
 	\begin{equation*}
 	\boxed{PE = -\dfrac{m\mu}{R}}
 	\end{equation*}
-	
+
 	\begin{align*}
 	m &= \text{spacecraft's mass (\si{\kilo\gram})}\\
 	\mu &= \text{gravitational parameter (\si{\kilo\meter\cubed\per\second\squared})}\\
@@ -168,20 +175,20 @@ In the absence of outside forces, linear and angular momentum are conserved.
 	\begin{equation*}
 	\boxed{KE = \dfrac{1}{2} m V^{2}}
 	\end{equation*}
-	
+
 	\begin{align*}
 	KE &= \text{kinetic energy (\si{\kilo\gram\,\meter\squared\per\second\squared)}}\\
 	m &= \text{mass (\si{\kilo\gram})}\\
 	V &= \text{velocity (\si{\kilo\meter\per\second}})\\
 	\end{align*}
-	
+
 	\vfill\null
 	\columnbreak
-	
+
 	\begin{equation*}
 	\boxed{E = \dfrac{1}{2} m V^{2} - \dfrac{m\mu}{R}}
 	\end{equation*}
-	
+
 	\begin{align*}
 	E &= \text{total mech. energy (\si{\kilo\gram\,\meter\squared\per\second\squared)}}\\
 	m &= \text{mass (\si{\kilo\gram})}\\
@@ -201,7 +208,6 @@ In the absence of outside forces, linear and angular momentum are conserved.
 	\caption{Geocentric equatorial coordinates. The origin is the centre of the Earth. The fundamental plane is the plane of the Earth's equator. The primary direction (the x axis) is the vernal equinox. A right-handed convention specifies a y axis 90° to the east in the fundamental plane; the z axis is the north polar axis. The reference frame does not rotate with the Earth, rather, the Earth rotates around the z axis.}
 	\label{fig:coordinate_system}
 \end{figure*}
-
 
 A coordinate system (figure \ref{fig:coordinate_system}) is:
 \begin{itemize}
@@ -255,24 +261,23 @@ R &= \text{magnitude of the spacecraft's position vector (\si{\kilo\meter})}\\
 	\begin{equation*}
 	\boxed{e = \dfrac{2c}{2a} = \dfrac{R_{a} - R_{p}}{R_{a} + R_{p}}}
 	\end{equation*}
-	
+
 	\begin{align*}
 	e = eccentricity\\
 	\end{align*}
 	\vfill\null
 	\columnbreak
-	
+
 	\begin{equation*}
 	\boxed{R = \dfrac{a ( 1 - e^{2})}{1 + e cos \nu}}
 	\end{equation*}
-	
+
 	\begin{align*}
 	R &= \text{magnitude of the spacecraft's position vector (km)}\\
 	a &= \text{semi-major axis (km)}\\
 	e &= \text{eccentricity (unitless)}\\
 	\nu &= \text{true anomaly (deg or rad)}\\
 	\end{align*}
-	
 \end{multicols}
 \end{samepage}
 
@@ -291,4 +296,60 @@ R &= \text{magnitude of the spacecraft's position vector (\si{\kilo\meter})}\\
 		\hline
 	\end{tabular}
 \end{center}
+
+\section{Constants of orbital motion}
+\subsection{Specific mechanical energy}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\varepsilon \equiv \dfrac{E}{m} = \dfrac{V^2}{2} - \dfrac{\mu}{R}}
+	\end{equation*}
+
+	\begin{equation*}
+	\boxed{V = \sqrt{2(\dfrac{\mu}{R} + \varepsilon)}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\myvarepsilon\\
+	\myvarv\\
+	\myvarmukm \\
+	R &= \text{spacecraft's distance from Earth's center (\si{\kilo\meter})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\varepsilon = - \dfrac{\mu}{2a}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\myvarepsilon\\
+	\myvarmukm \\
+	\myvara\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{P = 2\pi\sqrt{\dfrac{a^3}{\mu}}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	P &= \text{period (seconds)}\\
+	\pi &= \text{3.14159... (unitless)}\\
+	\myvara\\
+	\myvarmukm \\
+	\end{align*}
+\end{multicols}
+
+\subsection{Specific angular momentum}
 \end{document}
