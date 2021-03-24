@@ -9,7 +9,10 @@
 \usepackage{multicol}
 \usepackage{graphicx}
 \usepackage{caption, copyrightbox}
+
 \captionsetup{justification=centering, labelfont=sc, labelsep=endash}
+
+\title{Astronautics Cheat Sheet}
 
 \newcommand{\myvarmukm}{\mu &= \text{Gravitational parameter \si{\kilo\meter\cubed\per\sec\squared}} \approx 3.986 \times 10^5 \si{\kilo\meter\cubed\per\second\squared} \text{ for Earth}} 
 
@@ -20,6 +23,15 @@
 \newcommand{\myvara}{a &= \text{semimajor axis (\si{\kilo\meter})}}
 
 \begin{document}
+\maketitle
+
+\section{Math review}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{img/trigo_triangle}
+		\label{fig:trigo_triangle}
+	\end{figure}
+
 \section{Constants}
 \begin{center}
 	\begin{tabular}{|c | c |  c | c |} 
@@ -139,7 +151,7 @@ In the absence of outside forces, linear and angular momentum are conserved.
 	\end{equation*}
 
 	\begin{align*}
-	E &= \text{total mech. energy (\si{\kilo\gram\,\meter\squared\per\second\squared)}}\\
+	E &= \text{total mechanical energy (\si{\kilo\gram\,\meter\squared\per\second\squared)}}\\
 	KE &= \text{kinetic energy (\si{\kilo\gram\,\meter\squared\per\second\squared)}}\\
 	PE &= \text{potential energy (\si{\kilo\gram\,\meter\squared\per\second\squared)}}\\
 	\end{align*}
@@ -352,4 +364,153 @@ R &= \text{magnitude of the spacecraft's position vector (\si{\kilo\meter})}\\
 \end{multicols}
 
 \subsection{Specific angular momentum}
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\vec{h} \equiv \dfrac{\vec{H}}{m} = \vec{R} \times \vec{V}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\vec{h} &= \text{spacecraft's specific angular momentum (\si{\kilo\meter\squared\per\second})}\\
+	\vec{R} &= \text{spacecraft's position vector (\si{\kilo\meter})}\\
+	\vec{V} &= \text{spacecraft's velocity vector (\si{\kilo\meter\per\second})}\\
+	\end{align*}
+\end{multicols}
+
+\section{Describing orbits}
+\subsection{Orbital elements}
+\begin{itemize}
+	\item Size: semimajor axis, a
+	\item Shape: eccentricity, e
+	\item Tilt: inclination, i
+	\item Angle from vernal equinox to ascending node: right ascension of ascending node, $\Omega$
+	\item Angle from AN to Pe: argument of perigee, $\omega$
+	\item Angle from Pe to spacecraft: true anomaly, $\nu$
+\end{itemize}
+
+\subsection{Computing orbital elements}
+Knowing $\vec{R}$ and $\vec{V}$ from ground tracking, we can compute orbital elements:
+
+\begin{multicols}{3}
+\begin{equation*}
+\boxed{\varepsilon = \dfrac{V^2}{2} - \dfrac{\mu}{R}}
+\end{equation*}
+
+\begin{equation*}
+\boxed{a = - \dfrac{\mu}{2 \varepsilon}}
+\end{equation*}
+
+\vfill\null
+\columnbreak
+
+\begin{align*}
+\myvarepsilon\\
+\myvarv\\
+\myvarmukm \\
+R &= \text{spacecraft's distance from Earth's center (\si{\kilo\meter})}\\
+\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\vec{e} = \dfrac{1}{\mu}\left[\left(V^2 - \dfrac{\mu}{R}\right)\vec{R} - (\vec{R}\cdot\vec{V})\vec{V}\right]}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\vec{e} &= \text{eccentricity vetor (unitless, points at Pe)}\\
+	\myvarmukm \\
+	V &= \text{magnitude of $\vec{V}$ (\si{\kilo\meter\per\second})}\\
+	R &= \text{magnitude of $\vec{R}$ (\si{\kilo\meter})}\\
+	\vec{R} &= \text{position vector (\si{\kilo\meter})}\\
+	\vec{V} &= \text{velocity vector (\si{\kilo\meter\per\second})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{i = \cos^{-1}\left(\dfrac{\hat{K} \cdot \vec{h}}{K h}\right)}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	i &= \text{inclination (\si{\deg \text{or } \radian})}\\
+	\hat{K} &= \text{unit vector through the North Pole}\\
+	\vec{h} &= \text{specific angular momentum vector (\si{\kilo\meter\squared\per\second})}\\
+	K &= \text{magnitude of $\hat{K}$ = 1}\\
+	h &= \text{magnitude of $\vec{h}$ (\si{\kilo\meter\squared\per\second})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\vec{n} = \hat{K} \times \vec{h}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\vec{n} &= \text{ascending node vector (\si{\kilo\meter\squared\per\second}, points at the ascending node)}\\
+	\hat{K} &= \text{unit vector through the North Pole}\\
+	\vec{h} &= \text{specific angular momentum vector (\si{\kilo\meter\squared\per\second})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\Omega = \cos^{-1}\left(\dfrac{\hat{I} \cdot \vec{n}}{In}\right)}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\Omega &= \text{right ascension of the ascending node (\si{\deg \text{or } \radian})}\\
+	\hat{I} &= \text{unit vector in the principal direction}\\
+	\vec{n} &= \text{ascending node vector (\si{\kilo\meter\squared\per\second}, points at the ascending node)}\\
+	I &= \text{magnitude of $\hat{I}$ = 1}\\
+	n &= \text{magnitude of $\vec{n}$ (\si{\kilo\meter\squared\per\second})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\omega = \cos^{-1} \left(\dfrac{\vec{n}\cdot\vec{e}}{ne}\right)}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\omega &= \text{argument of perigee (\si{\deg \text{or } \radian})}\\
+	\vec{n} &= \text{ascending node vector (\si{\kilo\meter\squared\per\second}, points at the ascending node)}\\
+	\vec{e} &= \text{eccentricity vector (unitless, points at perigee)}\\
+	n &= \text{magnitude of $\vec{n}$ (\si{\kilo\meter\squared\per\second})}\\
+	e &= \text{magnitude of $\vec{e}$ (unitless)}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\nu = \cos^{-1} \left(\dfrac{\vec{e}\cdot\vec{R}}{eR}\right)}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\nu &= \text{true anomaly (\si{\deg \text{or } \radian})}\\
+	\vec{e} &= \text{eccentricity vector (unitless, points at perigee)}\\
+	\vec{R} &= \text{position vector (\si{\kilo\meter}}\\
+	e &= \text{magnitude of $\vec{e}$ (unitless)}\\
+	R &= \text{magnitude of $\vec{R}$ (\si{\kilo\meter})}\\
+	\end{align*}
+\end{multicols}
 \end{document}
