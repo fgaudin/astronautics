@@ -9,6 +9,7 @@
 \usepackage{multicol}
 \usepackage{graphicx}
 \usepackage{caption, copyrightbox}
+\usepackage{url}
 
 \captionsetup{justification=centering, labelfont=sc, labelsep=endash}
 
@@ -26,11 +27,71 @@
 \maketitle
 
 \section{Math review}
+\subsection{Trigonometry}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.4\linewidth]{img/trigo_triangle}
 		\label{fig:trigo_triangle}
 	\end{figure}
+
+\subsubsection*{SOH-CAH-TOA}
+
+\begin{itemize}
+	\item $\sin$ $\theta$ = Opposite / Hypotenuse
+	\item $\cos$ $\theta$ = Adjacent / Hypotenuse
+	\item $\tan$ $\theta$ = Opposite / Adjacent
+\end{itemize}
+
+\subsubsection*{Spherical Trigonometry}
+TODO
+
+\subsection{Vector math}
+\subsubsection*{Vector components}
+$\vec{A} = A_I\hat{I} + A_J\hat{J} + A_K\hat{K}$
+
+\subsubsection*{Magnitude of vector}
+$\lVert\vec{A}\rVert = A = \sqrt{A_I^2 + A_J^2 + A_K^2}$
+
+\subsubsection*{Vector addition}
+$\vec{A} + \vec{B} = (A_I + B_I)\hat{I} + (A_J + B_J)\hat{J} + (A_K + B_K)\hat{K}$
+
+\subsubsection*{Scalar or dot product}
+
+\begin{multicols}{3}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{img/dot_product}
+		\label{fig:dot_product}
+	\end{figure}
+
+	\columnbreak
+	\begin{equation*}
+	\boxed{\vec{A}\cdot\vec{B} = AB\cos\theta}
+	\end{equation*}
+
+	\begin{equation*}
+	\boxed{\vec{A}\cdot\vec{B} = (A_IB_I) + (A_JB_J) + (A_KB_K)}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{equation*}
+	\boxed{\theta = \cos^-1 \dfrac{\vec{A}\cdot\vec{B}}{AB}}
+	\end{equation*}
+\end{multicols}
+
+\subsubsection*{Vector or cross product}
+	\begin{figure}[H]
+		\centering
+		\copyrightbox[r]{\includegraphics[width=0.4\linewidth]{img/right_hand_rule_cross_product}}{\textcopyright Acdx, CC BY-SA 3.0 \url{http://creativecommons.org/licenses/by-sa/3.0/>}, via Wikimedia Commons \url{https://commons.wikimedia.org/wiki/File:Right_hand_rule_cross_product.svg>}}
+		\caption{Right hand rule}
+		\label{fig:right_hand_rule}
+	\end{figure}
+
+	\begin{equation*}
+	\boxed{\vec{A} \times \vec{B} = [(A_J)(B_K)-(B_J)(A_K)]\hat{I} - [(A_I)(B_K) - (B_I)(A_K)]\hat{J} + [(A_I)(B_J)-(B_I)(A_J)]}
+	\end{equation*}
 
 \section{Constants}
 \begin{center}
