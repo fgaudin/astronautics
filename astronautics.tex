@@ -462,10 +462,17 @@ R &= \text{magnitude of the spacecraft's position vector (\si{\kilo\meter})}\\
 	\item Size: semimajor axis, a
 	\item Shape: eccentricity, e
 	\item Tilt: inclination, i
-	\item Angle from vernal equinox to ascending node: right ascension of ascending node, $\Omega$
+	\item Angle from vernal equinox to ascending node: right ascension (or longitude) of ascending node, $\Omega$
 	\item Angle from AN to Pe: argument of perigee, $\omega$
 	\item Angle from Pe to spacecraft: true anomaly, $\nu$
 \end{itemize}
+
+\begin{figure*}[!h]
+	\centering
+	\copyrightbox[r]{\includegraphics[width=0.6\linewidth]{img/orbit_elements}}{\textcopyright Lasunncty at the English Wikipedia \url{https://upload.wikimedia.org/wikipedia/commons/e/eb/Orbit1.svg}, CC BY-SA 3.0 \url{http://creativecommons.org/licenses/by-sa/3.0/}, via Wikimedia Commons}
+	\caption{Orbital elements}
+	\label{fig:coordinate_system}
+\end{figure*}
 
 \subsection{Computing orbital elements}
 Knowing $\vec{R}$ and $\vec{V}$ from ground tracking, we can compute orbital elements:
@@ -513,6 +520,9 @@ R &= \text{spacecraft's distance from Earth's center (\si{\kilo\meter})}\\
 	\boxed{i = \cos^{-1}\left(\dfrac{\hat{K} \cdot \vec{h}}{K h}\right)}
 	\end{equation*}
 
+	\begin{equation*}
+	0 \leq i \leq 180^\circ
+	\end{equation*}
 	\vfill\null
 	\columnbreak
 
@@ -529,7 +539,6 @@ R &= \text{spacecraft's distance from Earth's center (\si{\kilo\meter})}\\
 	\begin{equation*}
 	\boxed{\vec{n} = \hat{K} \times \vec{h}}
 	\end{equation*}
-
 	\vfill\null
 	\columnbreak
 
@@ -544,6 +553,13 @@ R &= \text{spacecraft's distance from Earth's center (\si{\kilo\meter})}\\
 	\begin{equation*}
 	\boxed{\Omega = \cos^{-1}\left(\dfrac{\hat{I} \cdot \vec{n}}{In}\right)}
 	\end{equation*}
+
+	\begin{equation*}
+	 \text{if } n_j \geq 0 \text{ then } 0 \leq \Omega \leq 180^\circ
+	\end{equation*}
+	\begin{equation*}
+	\text{if } n_j < 0 \text{ then } 180^\circ < \Omega < 360^\circ
+ 	\end{equation*}
 
 	\vfill\null
 	\columnbreak
@@ -561,6 +577,13 @@ R &= \text{spacecraft's distance from Earth's center (\si{\kilo\meter})}\\
 	\begin{equation*}
 	\boxed{\omega = \cos^{-1} \left(\dfrac{\vec{n}\cdot\vec{e}}{ne}\right)}
 	\end{equation*}
+	
+	\begin{equation*}
+	\text{if } e_K \geq 0 \text{ then } 0 \leq \omega \leq 180^\circ
+	\end{equation*}
+	\begin{equation*}
+	\text{if } e_K < 0 \text{ then } 180^\circ < \omega < 360^\circ
+	\end{equation*}
 
 	\vfill\null
 	\columnbreak
@@ -577,6 +600,13 @@ R &= \text{spacecraft's distance from Earth's center (\si{\kilo\meter})}\\
 \begin{multicols}{3}
 	\begin{equation*}
 	\boxed{\nu = \cos^{-1} \left(\dfrac{\vec{e}\cdot\vec{R}}{eR}\right)}
+	\end{equation*}
+	
+	\begin{equation*}
+	\text{if } \vec{R}\cdot\vec{V} \geq 0 \text{ then } 0 \leq \nu \leq 180^\circ
+	\end{equation*}
+	\begin{equation*}
+	\text{if } \vec{R}\cdot\vec{V} < 0 \text{ then } 180^\circ < \nu < 360^\circ
 	\end{equation*}
 
 	\vfill\null
