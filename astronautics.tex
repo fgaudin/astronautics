@@ -474,7 +474,7 @@ R &= \text{magnitude of the spacecraft's position vector (\si{\kilo\meter})}\\
 	\label{fig:coordinate_system}
 \end{figure*}
 
-\subsection{Computing orbital elements}
+\subsection{Computing orbital elements} \label{computing_orbital_elements}
 Knowing $\vec{R}$ and $\vec{V}$ from ground tracking, we can compute orbital elements:
 
 \begin{multicols}{3}
@@ -620,4 +620,94 @@ R &= \text{spacecraft's distance from Earth's center (\si{\kilo\meter})}\\
 	R &= \text{magnitude of $\vec{R}$ (\si{\kilo\meter})}\\
 	\end{align*}
 \end{multicols}
+
+\subsection{Ground tracks}
+Nodal displacement: displacement of orbit to the west between each revolution
+
+\begin{equation*}
+\boxed{\Delta N = 360^\circ - \text{longitude between successive ascending nodes}}
+\end{equation*}
+
+\begin{equation*}
+\boxed{\text{Period (hours)} = \dfrac{\Delta N}{15^\circ / hr}}
+\text{ for direct orbits only} (0 < i < 90^\circ)
+\end{equation*}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{a = \sqrt[3]{\mu (P / 2\pi)}}
+	\end{equation*}
+	
+	\vfill\null
+	\columnbreak
+	
+	\begin{align*}
+	a &= \text{semimajor axis (\si{\kilo\meter)}}\\
+	\myvarmukm\\
+	P &= \text{period (\si{\second})}\\
+	\pi &= 3.14159... \text{(unitless)}\\
+	\end{align*}
+\end{multicols}
+
+inclination = highest latitude
+
+\begin{itemize}
+	\item For a direct orbit ($0 < i < 90^\circ$), inclination = highest north or south latitude.
+	\item For a retrograde orbit ($90^\circ < i < 180^\circ$), inclination = 180 - max latitude
+\end{itemize}
+
+\section{Maneuvers}
+\subsection{Hohmann Transfers}
+
+\begin{figure*}[!h]
+	\centering
+	\copyrightbox[r]{\includegraphics[width=0.5\linewidth]{img/hohmann_transfer}}{\textcopyright Leafnode \url{https://commons.wikimedia.org/wiki/File:Hohmann_transfer_orbit.svg} CC BY-SA 2.5 \url{https://creativecommons.org/licenses/by-sa/2.5}, via Wikimedia Commons}
+	\caption{Transfer orbit}
+	\label{fig:coordinate_system}
+\end{figure*}
+
+Specific mechanical energy of each orbit:
+
+\begin{itemize}
+	\item $\varepsilon_{\text{orbit 1}} = -\dfrac{\mu}{2a_{\text{orbit 1}}}$
+	\item $\varepsilon_{\text{orbit 2}} = -\dfrac{\mu}{2a_{\text{orbit 2}}}$
+	\item $\varepsilon_{transfer} = -\dfrac{\mu}{2a_{transfer}}$ with $2a_{transfer} = R + R'$
+\end{itemize}
+
+Velocity at each maneuver point using specific mechanical energy equation from section \ref{computing_orbital_elements}:
+
+\begin{multicols}{2}
+	\begin{itemize}
+		\item $V_{\text{orbit 1}} = \sqrt{2\left(\dfrac{\mu}{R} + \varepsilon_{\text{orbit 1}}\right)}$
+		\item $V_{\text{orbit 2}} = \sqrt{2\left(\dfrac{\mu}{R'} + \varepsilon_{\text{orbit 2}}\right)}$
+		\item $V_{\text{transfer at orbit 1}} = \sqrt{2\left(\dfrac{\mu}{R} + \varepsilon_{transfer}\right)}$
+		\item $V_{\text{transfer at orbit 2}} = \sqrt{2\left(\dfrac{\mu}{R'} + \varepsilon_{transfer}\right)}$
+	\end{itemize}
+	\vfill\null
+	\columnbreak
+	\begin{itemize}
+		\item $\Delta V_1 = |V_{\text{transfer at orbit 1}} - V_{\text{orbit 1}}|$
+		\item $\Delta V_2 = |V_{\text{orbit 2}} - V_{\text{transfer at orbit 2}}|$
+		\item $\Delta V_{total} = \Delta V_1 + \Delta V_2$
+	\end{itemize}
+\end{multicols}
+
+Time of flight = half period
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{TOF = \dfrac{P}{2} = \pi \sqrt{\dfrac{a_{transfer}^3}{\mu}}}
+	\end{equation*}
+	
+	\vfill\null
+	\columnbreak
+	
+	\begin{align*}
+	TOF &= \text{spacecraft's time of flight}\\
+	P &= \text{orbital period (\si{\second})}\\
+	a &= \text{semimajor axis of transfer orbit (\si{\kilo\meter)}}\\
+	\myvarmukm\\
+	\end{align*}
+\end{multicols}
+
 \end{document}
