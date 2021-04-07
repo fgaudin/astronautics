@@ -710,4 +710,38 @@ Time of flight = half period
 	\end{align*}
 \end{multicols}
 
+\subsection{Plane changes}
+\subsubsection{Simple plane changes}
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\Delta V_{simple} = 2 V_{initial} \sin{\dfrac{\theta}{2}}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+	
+	\begin{align*}
+	\Delta V_{simple} &= \text{velocity change for a simple plane change (\si{\km\per\second})}\\
+	V_{initial} = V_{final} &= \text{velocities in the initial and final orbits (\si{\km\per\second})}\\
+	\theta &= \text{plane-change angle (\si{\deg \text{or }\radian})}\\
+	\end{align*}
+\end{multicols}
+
+Change of inclination: maneuver at ascending/descending node.
+
+Change of right ascension of ascending node, $\Omega$: maneuver at North or South pole for polar orbit
+
+\subsubsection{Combined plane change}
+Hohmann transfer combined with plane change at apogee (more efficient):
+
+\begin{equation*}
+\boxed{\Delta V_{combined} = \sqrt{|\vec{V}_{initial}|^2 + |\vec{V}_{final}|^2} - 2|\vec{V}_{initial}||\vec{V}_{final}| \cos{\theta}}
+\end{equation*}
+
+\begin{align*}
+\Delta V_{combined} &= \text{velocity change for a combined plane change (\si{\km\per\second})}\\
+|\vec{V}_{initial}| &= \text{magnitude of the velocity in the initial orbit (\si{\km\per\second})}\\
+|\vec{V}_{final}| &= \text{magnitude of the velocity in the final orbit (\si{\km\per\second})}\\
+\theta &= \text{plane-change angle (\si{\deg \text{or }\radian})}\\
+\end{align*}
 \end{document}
