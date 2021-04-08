@@ -744,4 +744,77 @@ Hohmann transfer combined with plane change at apogee (more efficient):
 |\vec{V}_{final}| &= \text{magnitude of the velocity in the final orbit (\si{\km\per\second})}\\
 \theta &= \text{plane-change angle (\si{\deg \text{or }\radian})}\\
 \end{align*}
+
+\subsection{Rendezvous}
+\subsubsection{Coplanar}
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\omega = \sqrt{\dfrac{\mu}{a^3}}}
+	\end{equation*}
+	
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	\omega &= \text{spacecraft's angular velocity (\si{\radian\per\second})}\\
+	\myvarmukm\\
+	\myvara\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\alpha_{lead} = \omega_{target}TOF}
+	\end{equation*}
+	
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	\alpha_{lead} &= \text{amount by which the interceptor must lead the target (\si{\radian})}\\
+	\omega_{target} &= \text{target's angular velocity (\si{\radian\per\second})}\\
+	TOF &= \text{time of flight (\si{\second})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\phi_{final} = \pi - \alpha_{lead}}
+	\end{equation*}
+	
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	\phi_{final} &= \text{phase angle between the interceptor and target as the transfer begins (\si{\radian})}\\
+	\alpha_{lead} &= \text{angle by which the interceptor must lead the target (\si{\radian})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\text{wait time} = \dfrac{\phi_{final} - \phi_{initial}}{\omega_{target} - \omega_{interceptor}}}
+	\end{equation*}
+	
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	\text{wait time} &= \text{time until the interceptor initiates the rendezvous (\si{\second})}\\
+	\phi_{initial}, \phi_{final} &= \text{initial and final phase angle (\si{\radian})}\\
+	\omega_{target}, \omega_{interceptor} &= \text{target and interceptor angular velocities (\si{\radian\per\second})}\\
+	\end{align*}
+\end{multicols}
+
+\subsubsection{Co-orbital}
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{a_{phasing} = \sqrt[3]{\mu\left(\dfrac{\phi_{travel}}{2\pi\omega_{target}}\right)^2}}
+	\end{equation*}
+	
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	a_{phasing} &= \text{semimajor axis of the phasing orbit (\si{\kilo\meter})}\\
+	\myvarmukm\\
+	\phi_{travel} &= \text{angular distance between target and rendezvous location (\si{\radian})}\\
+	\omega_{target} &= \text{target's angular velocity (\si{\radian\per\second})}\\
+	\end{align*}
+\end{multicols}
 \end{document}
