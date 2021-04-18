@@ -26,6 +26,25 @@
 \begin{document}
 \maketitle
 
+\section{Constants}
+\begin{center}
+	\begin{tabular}{|c | c |  c | c |}
+		\hline
+		Symbol & Name & value & unit \\ [0.5ex]
+		\hline\hline
+		& Earth radius & 6378.14 & km \\
+		\hline
+		G & Universal gravitational constant & $6.67 \times 10^{-11}$ & \si{\newton \meter\squared\per\kilo\meter\squared}\\
+		\hline
+		$\mu$ & Gravitational parameter of Earth & $3.986 \times 10^{5}$ & \si{\kilo\meter\cubed\per\second\squared} \\
+		\hline
+		$\mu_{sun}$ & Gravitational parameter of the Sun & $1.327 \times 10^{11}$ & \si{\kilo\meter\cubed\per\second\squared} \\
+		\hline
+		$m_{sun}$ & Sun's mass & $1.989 \times 10^{30}$ & \si{\kilo\gram} \\
+		\hline
+	\end{tabular}
+\end{center}
+
 \section{Math review}
 \subsection{Trigonometry}
 	\begin{figure}[H]
@@ -108,19 +127,6 @@ $\vec{A} + \vec{B} = (A_I + B_I)\hat{I} + (A_J + B_J)\hat{J} + (A_K + B_K)\hat{K
 	\begin{equation*}
 	\boxed{\lVert\vec{A} \times \vec{B}\rVert = AB\sin\theta}
 	\end{equation*}
-
-\section{Constants}
-\begin{center}
-	\begin{tabular}{|c | c |  c | c |} 
-		\hline
-		Symbol & Name & value & unit \\ [0.5ex] 
-		\hline\hline
-		& Earth radius & 6378.14 & km \\ 
-		\hline
-		$\mu$ & Gravitational parameter & $3.986 \times 10^{14}$ & \si{\meter\cubed\per\second\squared} \\ 
-		\hline
-	\end{tabular}
-\end{center}
 
 \section{Newton's laws of motion}
 \subsection{Newton's first law of motion}
@@ -817,4 +823,185 @@ Hohmann transfer combined with plane change at apogee (more efficient):
 	\omega_{target} &= \text{target's angular velocity (\si{\radian\per\second})}\\
 	\end{align*}
 \end{multicols}
+
+\section{Interplanetary travel using the patched-conic approximation}
+
+\subsection{Sphere of influence}
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{R_{SOI} = a_{planet}\left(\dfrac{m_{planet}}{m_{sun}}\right)^\frac{2}{5}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	R_{SOI} &= \text{radius of a planet's SOI (\si{\kilo\meter})}\\
+	a_{planet} &= \text{semimajor axis of the planet's orbit around the Sun (\si{\kilo\meter})}\\
+	m_{planet} &= \text{planet's mass (\si{\kilo\gram})}\\
+	m_{sun} &= \text{Sun's mass $= 1.989 \times 10^{30}$ \si{\kilo\gram}}\\
+	\end{align*}
+\end{multicols}
+
+\subsection{Elliptical Hohmann transfer between planets}
+Assuming spacecraft on same orbit around the sun as the Earth and an heliocentric-ecliptic coordinate system:
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\varepsilon = \dfrac{V^2}{2} - \dfrac{\mu}{R}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	\myvarepsilon\\
+	\myvarv\\
+	\mu &= \text{gravitational parameter of the central body (\si{\kilo\meter\cubed\per\second\squared})} \\
+	&\approx 1.327 \times 10^{11} \si{\kilo\meter\cubed\per\second\squared} \text{ for our sun}\\
+	R &= \text{magnitude of the spacecraft's position vector (\si{\kilo\meter})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\varepsilon = - \dfrac{\mu}{2 a}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	a = \text{orbit's semimajor axis (\si{\kilo\meter})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{equation*}
+\boxed{V_{Earth} = \sqrt{2\left(\dfrac{\mu_{sun}}{R_{\text{to Earth}}} + \varepsilon_{Earth}\right)}}
+\end{equation*}
+
+\begin{align*}
+V_{Earth} &= \text{Earth's orbital velocity with respect to the Sun (\si{\kilo\meter\per\second})}\\
+\mu_{sun} &= \text{Sun's gravitational parameter $\approx 1.327 \times 10^{11}$ \si{\kilo\meter\cubed\per\second\squared}}\\
+R_{\text{to Earth}} &= \text{distance from the Sun to Earth} \\
+ &= \text{1 astronomical unit (AU)}\\
+ &= \text{$1.496 \times 10^8$ \si{\kilo\meter}}\\
+\varepsilon_{Earth} &= \text{specific mechanical energy of Earth's orbit (\si{\kilo\meter\squared\per\second\squared})}\\
+\end{align*}
+
+\subsection{From Earth to the target}
+Elliptical Hohmann transfer\\
+Reference Frame: Heliocentric-ecliptic\\
+$\mu_{sun}$ = \text{Sun's gravitational parameter $\approx 1.327 \times 10^{11}$ \si{\kilo\meter\cubed\per\second\squared}}\\
+
+\begin{multicols}{2}
+	\textbf{Energy}
+	\begin{equation*}
+	\varepsilon_{Earth} = - \dfrac{\mu_{Sun}}{2 a_{Earth}}
+	\end{equation*}
+
+	\begin{equation*}
+	\varepsilon_{transfer} = - \dfrac{\mu_{Sun}}{2 a_{transfer}}
+	\end{equation*}
+
+	\begin{equation*}
+	a_{transfer} = \dfrac{R_{to\ Earth} + R_{to\ target}}{2}
+	\end{equation*}
+
+	\begin{equation*}
+	\varepsilon_{target} = - \dfrac{\mu_{Sun}}{2 a_{target}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+	\textbf{Velocities}
+
+	\begin{equation*}
+	V_{Earth} = \sqrt{2\left(\dfrac{\mu_{Sun}}{R_{to\ Earth}} + \varepsilon_{Earth}\right)}
+	\end{equation*}
+
+	\begin{equation*}
+	V_{target} = \sqrt{2\left(\dfrac{\mu_{Sun}}{R_{to\ target}} + \varepsilon_{target}\right)}
+	\end{equation*}
+
+	\begin{equation*}
+	V_{transfer\ at\ Earth} = \sqrt{2\left(\dfrac{\mu_{Sun}}{R_{to\ Earth}} + \varepsilon_{transfer}\right)}
+	\end{equation*}
+
+	\begin{equation*}
+	V_{transfer\ at\ target} = \sqrt{2\left(\dfrac{\mu_{Sun}}{R_{to\ target}} + \varepsilon_{transfer}\right)}
+	\end{equation*}
+
+	\begin{equation*}
+	V_{\infty\ Earth} = |V_{transfer\ at\ Earth} - V_{Earth}|
+	\end{equation*}
+
+	\begin{equation*}
+	V_{\infty\ target} = |V_{target} - V_{transfer\ at\ target}|
+	\end{equation*}
+\end{multicols}
+
+\subsection{Departure from Earth}
+Hyperbolic trajectory\\
+Reference Frame: Geocentric-equatorial\\
+$\mu_{Earth}$ = $\approx 3.986 \times 10^{5}$ \si{\kilo\meter\cubed\per\second\squared}\\
+
+\begin{multicols}{2}
+	\textbf{Energy}
+	\begin{equation*}
+	\varepsilon_{\infty\ Earth} = \dfrac{V^2_{\infty\ Earth}}{2}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+	\textbf{Velocities}
+
+	\begin{equation*}
+	V_{\infty\ Earth} = \text{from above}
+	\end{equation*}
+
+	\begin{equation*}
+	V_{hyperbolic\ at\ Earth} = \sqrt{2\left(\dfrac{\mu_{Earth}}{R_{park\ at\ Earth}} + \varepsilon_{\infty\ Earth}\right)}
+	\end{equation*}
+
+	\begin{equation*}
+	V_{park\ at\ Earth} = \sqrt{\dfrac{\mu_{Earth}}{R_{park\ at\ Earth}}}
+	\end{equation*}
+
+	\begin{equation*}
+	\Delta V_{boost} = |V_{hyperbolic\ at\ Earth} - V_{park\ at\ Earth}|
+	\end{equation*}
+\end{multicols}
+
+\subsection{Arrival at target planet}
+Hyperbolic trajectory\\
+Reference Frame: Planet-centered equatorial\\
+$\mu_{planet} = G m_{planet}$ \si{\kilo\meter\cubed\per\second\squared}\\
+
+\begin{multicols}{2}
+	\textbf{Energy}
+	\begin{equation*}
+	\varepsilon_{\infty\ target} = \dfrac{V^2_{\infty\ target}}{2}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+	\textbf{Velocities}
+
+	\begin{equation*}
+	V_{\infty\ target} = \text{from above}
+	\end{equation*}
+
+	\begin{equation*}
+	V_{hyperbolic\ at\ target} = \sqrt{2\left(\dfrac{\mu_{target}}{R_{park\ at\ target}} + \varepsilon_{\infty\ target}\right)}
+	\end{equation*}
+
+	\begin{equation*}
+	V_{park\ at\ target} = \sqrt{\dfrac{\mu_{target}}{R_{park\ at\ target}}}
+	\end{equation*}
+
+	\begin{equation*}
+	\Delta V_{retro} = |V_{park\ at\ target} - V_{hyperbolic\ at\ target}|
+	\end{equation*}
+\end{multicols}
+
 \end{document}
