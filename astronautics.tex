@@ -1004,4 +1004,88 @@ $\mu_{planet} = G m_{planet}$ \si{\kilo\meter\cubed\per\second\squared}\\
 	\end{equation*}
 \end{multicols}
 
+\section{Predicting orbit - Kepler's Equation}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	n = \sqrt{\dfrac{\mu}{a^3}}
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	n &= \text{spacecraft's mean motion (\si{\radian\per\second})}\\
+	\myvarmukm\\
+	\myvara\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	M = nT
+	\end{equation*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{align*}
+	M &= \text{mean anomaly (\si{\radian})}\\
+	n &= \text{spacecraft's mean motion (\si{\radian\per\second})}\\
+	T &= \text{the time since last perigee passage (\si{\second})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{equation*}
+\boxed{M_{future} - M_{initial} = n(t_{future} - t_{initial}) - 2k\pi}
+\end{equation*}
+
+\begin{align*}
+M_{future} &= \text{mean anomaly when the spacecraft is in the future position (\si{\radian})}\\
+M_{initial} &= \text{mean anomaly when the spacecraft is in the initial position (\si{\radian})}\\
+t_{future} - t_{initial} &= \text{time of flight (TOF) between to points in the orbit}\\
+t_{future} &= \text{time when the spacecraft is in the final position}\\
+t_{initial} &= \text{time when the spacecraft is in the initial position}\\
+k &= \text{the number of times the spacecraft passes perigee during the TOF}\\
+\end{align*}
+
+\textbf{Kepler's equation}
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{M = E - e \sin E}
+	\end{equation*}
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	M &= \text{mean anomaly (\si{\radian})}\\
+	E &= \text{eccentric anomaly (\si{\radian})}\\
+	e &= \text{eccentricity (unitless)}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\cos E = \dfrac{e + \cos \nu}{1 + e \cos \nu}}
+	\end{equation*}
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	E &= \text{eccentric anomaly (\si{\radian})}\\
+	e &= \text{eccentricity (unitless)}\\
+	\nu &= \text{true anomaly (\si{\radian})}\\
+	\end{align*}
+\end{multicols}
+
+\begin{multicols}{3}
+	\begin{equation*}
+	\boxed{\cos \nu = \dfrac{\cos E - e}{1 - e \cos E}}
+	\end{equation*}
+	\vfill\null
+	\columnbreak
+	\begin{align*}
+	E &= \text{eccentric anomaly (\si{\radian})}\\
+	e &= \text{eccentricity (unitless)}\\
+	\nu &= \text{true anomaly (\si{\radian})}\\
+	\end{align*}
+\end{multicols}
 \end{document}
