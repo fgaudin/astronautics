@@ -28,7 +28,10 @@ def track(func):
     @functools.wraps(func)
     def wrapper_decorator(*args, **kwargs):
         caller = inspect.stack()[1].function
+        if caller == '<module>':
+            caller = 'start'
         called = func.__name__
         track_list.append(Dep(caller, called))
         return func(*args, **kwargs)
+
     return wrapper_decorator

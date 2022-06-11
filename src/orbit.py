@@ -7,8 +7,14 @@ G = 6.674 * 10**-11  # Gravitational constant
 
 
 class Body:
-    def __init__(self, mass: float) -> None:
-        self.mass = mass
+    def __init__(self, name, mass: float) -> None:
+        self.name = name
+        self._mass = mass
+
+    @property
+    @track
+    def mass(self):
+        return self._mass
 
     @property
     @track
@@ -23,11 +29,30 @@ class Orbit:
     def __init__(self, orbiter: Body, body: Body, orbiter_position: Vector, orbiter_velocity: Vector) -> None:
         self.orbiter = orbiter
         self.body = body
-        self.position = orbiter_position  # (km)
-        self.velocity = orbiter_velocity  # (km/s)
+        self._position = orbiter_position  # (km)
+        self._velocity = orbiter_velocity  # (km/s)
 
     def __str__(self) -> str:
-        return f'{self.velocity.magnitude} - {self.position.magnitude}'
+        true_anomaly = self.true_anomaly
+        coe = {
+            'a': self.semi_major_axis,
+            'e': self.eccentricity.magnitude,
+            'i': self.inclination,
+            'Ω': self.right_ascention,
+            'ω': self.argument_of_periapsis,
+            'ν': true_anomaly - 360 if true_anomaly > 180 else true_anomaly
+        }
+        return "\n".join([f'{k}: {v}' for k, v in coe.items()])
+
+    @property
+    @track
+    def position(self):
+        return self._position
+
+    @property
+    @track
+    def velocity(self):
+        return self._velocity
 
     @property
     def I(self):
@@ -100,6 +125,8 @@ class Orbit:
     @track
     def right_ascention(self):
         n = self.ascending_node
+        if n.magnitude == 0:
+            return None
         angle = math.degrees(math.acos(self.I.dot(n) / (self.I.magnitude * n.magnitude)))
         
         if n.y >= 0:
@@ -112,6 +139,10 @@ class Orbit:
     def argument_of_periapsis(self):
         n = self.ascending_node
         e = self.eccentricity
+
+        if n.magnitude == 0 or e.magnitude == 0:
+            return None
+
         angle = math.degrees(math.acos(n.dot(e)/ (n.magnitude * e.magnitude)))
 
         if e.z >= 0:
@@ -122,8 +153,15 @@ class Orbit:
     @property
     @track
     def true_anomaly(self):
+        """
+        Angle of the spacecraft with the periapsis
+        """
         e = self.eccentricity
-        angle = math.degrees(math.acos(e.dot(self.position)/ (e.magnitude * self.position.magnitude)))
+        if e.magnitude == 0:
+            return None
+        val_cos = e.dot(self.position)/ (e.magnitude * self.position.magnitude)
+        print(val_cos)
+        angle = math.degrees(math.acos(val_cos))
 
         if self.position.dot(self.velocity) >= 0:
             return min(angle, 360 - angle)
