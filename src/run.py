@@ -1,12 +1,16 @@
+import math
+from time import sleep
 import krpc
 
 from kmath import Vector
+from maneuver import injection_burn
 from orbit import Body, Orbit
 from utils import track_list
 
 
 if __name__ == '__main__':
     conn = krpc.connect(name='Hello World')
+    conn.krpc.paused = True
     vessel = conn.space_center.active_vessel
     bodies = conn.space_center.bodies
     ksp_kerbin = bodies['Kerbin']
@@ -40,11 +44,10 @@ if __name__ == '__main__':
     minmus_velocity = Vector(minmus_velocity_data[0], minmus_velocity_data[2], minmus_velocity_data[1]) / 1000
     minmus_orbit = Orbit(minmus, kerbin, minmus_position, minmus_velocity)
 
-    print('LEO')
-    print(leo)
-    print('Mun orbit')
-    print(mun_orbit)
-    print('Minmus orbit')
-    print(minmus_orbit)
+    current_time = conn.space_center.ut
+    conn.krpc.paused = False
+
+    dv_transfer = injection_burn(kerbin, leo, mun_orbit)
+    # node = vessel.control.add_node(current_time + leo.period, dv_transfer * 1000)
 
     # track_list.save()

@@ -9,6 +9,9 @@ class Vector:
     def __str__(self) -> str:
         return str((self.x, self.y, self.z))
 
+    def __repr__(self) -> str:
+        return self.__str__()
+
     @property
     def magnitude(self):
         return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
