@@ -1,5 +1,16 @@
 import math
 
+
+class Radian(float):
+    def degrees(self):
+        return math.degrees(self)
+
+
+class Degree(float):
+    def radians(self):
+        return math.radians(self)
+
+
 class Vector:
     def __init__(self,x ,y, z) -> None:
         self.x = x

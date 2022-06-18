@@ -1,5 +1,5 @@
 import math
-from kmath import Vector
+from kmath import Radian, Vector
 from utils import tracked, tracked_property
 
 
@@ -131,17 +131,26 @@ class Orbit:
         return self.eccentricity_vector.magnitude
 
     @tracked_property
-    def latus_rectum(self):
+    def parameter(self):
         """
         p
 
+        also called semi latus rectum
         witdh of curve at focus
         """
-        return self.semi_major_axis * (1 - self.eccentricity ** 2)
+        return self.specific_angular_momentum.magnitude ** 2 / self.body.gravitational_parameter
+
+    def radius_at_true_anomaly(self, true_anomaly: Radian):
+        return self.semi_latus_rectum / (1 + self.eccentricity * math.cos(true_anomaly))
+
 
     @tracked_property
     def radius_at_periapsis(self):
         return self.semi_major_axis * (1 - self.eccentricity)
+
+    @tracked_property
+    def radius_at_apoapsis(self):
+        return self.semi_major_axis * (1 + self.eccentricity)
 
     @tracked_property
     def specific_angular_momentum(self) -> Vector:
@@ -149,6 +158,10 @@ class Orbit:
         h
         """
         return self.position.cross(self.velocity)
+
+    @tracked_property
+    def node_vector(self):
+        return self.K.cross(self.specific_angular_momentum)
 
     @tracked_property
     def flight_path_angle(self):
@@ -201,8 +214,8 @@ class Orbit:
         else:
             return max(angle, 360 - angle)
 
-    @tracked_property
-    def true_anomaly(self):
+    @tracked
+    def true_anomaly(self, cosine=False):
         """
         Angle of the spacecraft with the periapsis
         """
@@ -210,6 +223,8 @@ class Orbit:
         if round(e.magnitude, 4) == 0:
             return None
         val_cos = e.dot(self.position)/ (e.magnitude * self.radius)
+        if cosine:
+            return val_cos
         angle = math.degrees(math.acos(round(val_cos, 9)))
 
         if self.position.dot(self.velocity) >= 0:
@@ -217,9 +232,29 @@ class Orbit:
         else:
             return max(angle, 360 - angle)
 
+    @tracked
+    def true_anomaly_at(self, radius, cosine=False):
+        cos_nu = (self.parameter - radius) / (self.eccentricity * radius)
+        if cosine:
+            return cos_nu
+        true_anomaly = math.acos(round(cos_nu, 9))
+        return math.degrees(true_anomaly)
+
     @property
     def period(self):
         return period(self.semi_major_axis, self.body.gravitational_parameter)
+
+    @tracked
+    def circular_velocity(self, radius):
+        """
+        velocity in circular orbit
+        """
+        return math.sqrt(self.body.gravitational_parameter / radius)
+
+    @tracked
+    def escape_velocity(self, radius):
+        return math.sqrt(2 * self.body.gravitational_parameter / radius)
+
 
     @tracked_property
     def sphere_of_influence(self):
@@ -231,6 +266,14 @@ class Orbit:
         n (rad/s)
         """
         return math.sqrt(self.body.gravitational_parameter/self.semi_major_axis**3)
+
+    @tracked_property
+    def true_longitude(self):
+        cos_theta = self.I.dot(self.position) / (self.I.magnitude * self.position.magnitude)
+        acos_theta = math.acos(cos_theta)
+        if self.J.dot(self.position) < 0:
+            acos_theta += math.pi
+        return math.degrees(acos_theta)
 
 
 

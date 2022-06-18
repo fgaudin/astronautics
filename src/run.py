@@ -1,3 +1,4 @@
+from datetime import timedelta
 import math
 from time import sleep
 import krpc
@@ -10,7 +11,6 @@ from utils import track_list
 
 if __name__ == '__main__':
     conn = krpc.connect(name='Hello World')
-    conn.krpc.paused = True
     vessel = conn.space_center.active_vessel
     bodies = conn.space_center.bodies
     ksp_kerbin = bodies['Kerbin']
@@ -45,9 +45,11 @@ if __name__ == '__main__':
     minmus_orbit = Orbit(minmus, kerbin, minmus_position, minmus_velocity)
 
     current_time = conn.space_center.ut
-    conn.krpc.paused = False
 
-    dv_transfer = injection_burn(kerbin, leo, mun_orbit)
-    # node = vessel.control.add_node(current_time + leo.period, dv_transfer * 1000)
+    print(f"max: {timedelta(seconds=20000)}")
+    dv_transfer, duration, time_to_maneuver = injection_burn(kerbin, leo, mun_orbit, 20000)
+    print(dv_transfer * 1000)
+    print(duration)
+    node = vessel.control.add_node(current_time + time_to_maneuver, dv_transfer * 1000)
 
     # track_list.save()
