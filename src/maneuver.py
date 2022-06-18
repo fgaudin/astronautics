@@ -47,6 +47,11 @@ def time_to_maneuver(initial_orbit: Orbit, target_orbit: Orbit, cos_nu1, time_of
 
 
 @tracked
+def eccentric_anomaly(eccentricity, cos_true_anomaly):
+    return (eccentricity + cos_true_anomaly)/(1 + eccentricity * cos_true_anomaly)
+
+
+@tracked
 def injection_burn(initial_orbit: Orbit, target_orbit: Orbit, max_duration=None):
     """
     max_duration in seconds
@@ -74,10 +79,10 @@ def injection_burn(initial_orbit: Orbit, target_orbit: Orbit, max_duration=None)
 
             e = transfer_orbit.eccentricity
             cos_nu0 = 1  #transfer_orbit.true_anomaly(cosine=True)
-            cos_E0 = (e + cos_nu0)/(1 + e * cos_nu0)
+            cos_E0 = eccentric_anomaly(e, cos_nu0)
             E0 = math.acos(cos_E0)
             cos_nu1 = transfer_orbit.true_anomaly_at(r1, cosine=True)
-            cos_E1 = (e + cos_nu1)/(1 + e * cos_nu1)
+            cos_E1 = eccentric_anomaly(e, cos_nu1)
             E1 = math.acos(cos_E1)
 
             a = transfer_orbit.semi_major_axis
