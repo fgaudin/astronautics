@@ -46,7 +46,8 @@ if __name__ == '__main__':
 
     current_time = conn.space_center.ut
 
-    dv_transfer, duration, time_to_maneuver = injection_burn(kerbin, leo, mun_orbit, 20000)
-    node = vessel.control.add_node(current_time + time_to_maneuver, dv_transfer * 1000)
+    maneuver = injection_burn(leo, mun_orbit, 20000)
+    node = vessel.control.add_node(current_time + maneuver.time_to_maneuver, maneuver.dv * 1000)
+    print(f'arrival in: {maneuver.duration}')
 
     # track_list.save()
