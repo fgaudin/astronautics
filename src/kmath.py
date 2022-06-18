@@ -1,14 +1,26 @@
 import math
 
 
-class Radian(float):
-    def degrees(self):
+class Angle(float):
+    def __init__(self, rad=None, deg=None):
+        if not (rad or deg):
+            raise Exception('Either rad or deg needs to be provided')
+
+        if rad:
+            self = rad
+        else:
+            self = math.radians(deg)
+
+    @property
+    def rad(self):
+        return self
+
+    @property
+    def deg(self):
         return math.degrees(self)
 
 
-class Degree(float):
-    def radians(self):
-        return math.radians(self)
+PI = Angle(math.pi)
 
 
 class Vector:

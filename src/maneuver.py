@@ -3,7 +3,7 @@ from collections import namedtuple
 from datetime import timedelta
 import math
 from multiprocessing.dummy import current_process
-from kmath import Vector
+from kmath import PI, Vector
 from orbit import Orbit, period
 
 from utils import tracked
@@ -59,15 +59,17 @@ def injection_burn(body, initial_orbit: Orbit, target_orbit: Orbit, max_duration
 
         nu0 = 0
         nu1 = math.acos(cos_nu1)
-        angular_velocity_orbiter = 2 * math.pi / initial_orbit.period
-        angular_velocity_target = 2 * math.pi / target_orbit.period
+        angular_velocity_orbiter = 2 * PI / initial_orbit.period
+        angular_velocity_target = 2 * PI / target_orbit.period
         phase_angle_at_departure = nu1 - nu0 - angular_velocity_target * tof
-        u_o = math.radians(initial_orbit.true_longitude)
-        u_t = math.radians(target_orbit.true_longitude)
+        u_o = initial_orbit.true_longitude
+        u_t = target_orbit.true_longitude
         current_phase_angle = u_t - u_o
+        if current_phase_angle < 0:
+            current_phase_angle += 2 * PI
         angle_to_travel = current_phase_angle - phase_angle_at_departure
         if angle_to_travel < 0:
-            angle_to_travel += 2 * math.pi
+            angle_to_travel += 2 * PI
 
         time_to_maneuver = angle_to_travel / (angular_velocity_orbiter - angular_velocity_target)
 

@@ -1,5 +1,5 @@
 import math
-from kmath import Radian, Vector
+from kmath import PI, Angle, Vector
 from utils import tracked, tracked_property
 
 
@@ -140,8 +140,8 @@ class Orbit:
         """
         return self.specific_angular_momentum.magnitude ** 2 / self.body.gravitational_parameter
 
-    def radius_at_true_anomaly(self, true_anomaly: Radian):
-        return self.semi_latus_rectum / (1 + self.eccentricity * math.cos(true_anomaly))
+    def radius_at_true_anomaly(self, true_anomaly: Angle):
+        return self.parameter / (1 + self.eccentricity * math.cos(true_anomaly.rad))
 
 
     @tracked_property
@@ -164,7 +164,7 @@ class Orbit:
         return self.K.cross(self.specific_angular_momentum)
 
     @tracked_property
-    def flight_path_angle(self):
+    def flight_path_angle(self) -> Angle:
         """
         φ (phi)
         """
@@ -172,16 +172,16 @@ class Orbit:
         rv = self.radius * self.velocity.magnitude
         sign = 1 if self.position.dot(self.velocity) >= 0 else -1
         phi = math.acos(h/rv) * sign
-        return math.degrees(phi)
+        return Angle(phi)
 
     @tracked_property
-    def inclination(self):
+    def inclination(self) -> Angle:
         """
         i
         """
         h = self.specific_angular_momentum
-        angle = math.degrees(math.acos(round(self.K.dot(h)/(self.K.magnitude * h.magnitude), 9)))
-        return min(angle, 360 - angle)
+        angle = Angle(math.acos(round(self.K.dot(h)/(self.K.magnitude * h.magnitude), 9)))
+        return min(angle, 2 * PI - angle)
 
     @tracked_property
     def ascending_node(self) -> Vector:
@@ -192,30 +192,30 @@ class Orbit:
         n = self.ascending_node
         if n.magnitude == 0:
             return None
-        angle = math.degrees(math.acos(self.I.dot(n) / (self.I.magnitude * n.magnitude)))
+        angle = Angle(math.acos(self.I.dot(n) / (self.I.magnitude * n.magnitude)))
         
         if n.y >= 0:
-            return min(angle, 360 - angle)
+            return min(angle, 2 * PI - angle)
         else:
-            return max(angle, 360 - angle)
+            return max(angle, 2 * PI - angle)
 
     @tracked_property
-    def argument_of_periapsis(self):
+    def argument_of_periapsis(self) -> Angle:
         n = self.ascending_node
         e = self.eccentricity_vector
 
         if n.magnitude == 0 or e.magnitude == 0:
             return None
 
-        angle = math.degrees(math.acos(n.dot(e)/ (n.magnitude * e.magnitude)))
+        angle = Angle(math.acos(n.dot(e)/ (n.magnitude * e.magnitude)))
 
         if e.z >= 0:
-            return min(angle, 360 - angle)
+            return min(angle, 2 * PI - angle)
         else:
-            return max(angle, 360 - angle)
+            return max(angle, 2 * PI - angle)
 
     @tracked
-    def true_anomaly(self, cosine=False):
+    def true_anomaly(self, cosine=False) -> Angle:
         """
         Angle of the spacecraft with the periapsis
         """
@@ -225,20 +225,20 @@ class Orbit:
         val_cos = e.dot(self.position)/ (e.magnitude * self.radius)
         if cosine:
             return val_cos
-        angle = math.degrees(math.acos(round(val_cos, 9)))
+        angle = Angle(math.acos(round(val_cos, 9)))
 
         if self.position.dot(self.velocity) >= 0:
-            return min(angle, 360 - angle)
+            return min(angle, 2 * PI - angle)
         else:
-            return max(angle, 360 - angle)
+            return max(angle, 2 * PI - angle)
 
     @tracked
-    def true_anomaly_at(self, radius, cosine=False):
+    def true_anomaly_at(self, radius, cosine=False) -> Angle:
         cos_nu = (self.parameter - radius) / (self.eccentricity * radius)
         if cosine:
             return cos_nu
         true_anomaly = math.acos(round(cos_nu, 9))
-        return math.degrees(true_anomaly)
+        return Angle(true_anomaly)
 
     @property
     def period(self):
@@ -268,12 +268,12 @@ class Orbit:
         return math.sqrt(self.body.gravitational_parameter/self.semi_major_axis**3)
 
     @tracked_property
-    def true_longitude(self):
+    def true_longitude(self) -> Angle:
         cos_theta = self.I.dot(self.position) / (self.I.magnitude * self.position.magnitude)
         acos_theta = math.acos(cos_theta)
         if self.J.dot(self.position) < 0:
             acos_theta += math.pi
-        return math.degrees(acos_theta)
+        return Angle(acos_theta)
 
 
 
