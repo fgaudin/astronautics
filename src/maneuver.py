@@ -3,7 +3,7 @@ from collections import namedtuple
 from datetime import timedelta
 import math
 from multiprocessing.dummy import current_process
-from kmath import PI, Vector
+from kmath import PI, Angle, Vector
 from orbit import Orbit, period
 
 from utils import tracked
@@ -31,8 +31,6 @@ def injection_burn(body, initial_orbit: Orbit, target_orbit: Orbit, max_duration
     max_tof = period(major_axis_transfer/2, body.gravitational_parameter)/2
 
     tof = max_tof
-    print(f"first dv: {dv}")
-    print(f"max tof: {tof}")
 
     if max_duration:
         while tof > max_duration:
@@ -54,14 +52,12 @@ def injection_burn(body, initial_orbit: Orbit, target_orbit: Orbit, max_duration
             a = transfer_orbit.semi_major_axis
             mu = transfer_orbit.body.gravitational_parameter
             tof = math.sqrt(a**3/mu) * ((E1 - e * math.sin(E1)) - (E0 - e * math.sin(E0)))
-            print(dv)
-            print(tof)
 
         nu0 = 0
         nu1 = math.acos(cos_nu1)
         angular_velocity_orbiter = 2 * PI / initial_orbit.period
         angular_velocity_target = 2 * PI / target_orbit.period
-        phase_angle_at_departure = nu1 - nu0 - angular_velocity_target * tof
+        phase_angle_at_departure = Angle(nu1 - nu0 - angular_velocity_target * tof)
         u_o = initial_orbit.true_longitude
         u_t = target_orbit.true_longitude
         current_phase_angle = u_t - u_o
@@ -72,6 +68,5 @@ def injection_burn(body, initial_orbit: Orbit, target_orbit: Orbit, max_duration
             angle_to_travel += 2 * PI
 
         time_to_maneuver = angle_to_travel / (angular_velocity_orbiter - angular_velocity_target)
-
 
     return dv, timedelta(seconds=tof), time_to_maneuver

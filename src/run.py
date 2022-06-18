@@ -46,10 +46,7 @@ if __name__ == '__main__':
 
     current_time = conn.space_center.ut
 
-    print(f"max: {timedelta(seconds=20000)}")
     dv_transfer, duration, time_to_maneuver = injection_burn(kerbin, leo, mun_orbit, 20000)
-    print(dv_transfer * 1000)
-    print(duration)
     node = vessel.control.add_node(current_time + time_to_maneuver, dv_transfer * 1000)
 
     # track_list.save()

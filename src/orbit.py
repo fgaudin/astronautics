@@ -272,7 +272,7 @@ class Orbit:
         cos_theta = self.I.dot(self.position) / (self.I.magnitude * self.position.magnitude)
         acos_theta = math.acos(cos_theta)
         if self.J.dot(self.position) < 0:
-            acos_theta += math.pi
+            acos_theta = 2 * math.pi - acos_theta
         return Angle(acos_theta)
 
 

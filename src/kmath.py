@@ -19,6 +19,33 @@ class Angle(float):
     def deg(self):
         return math.degrees(self)
 
+    def __repr__(self):
+        return f'rad: {super().__repr__()} - deg: {self.deg}'
+
+    def __str__(self) -> str:
+        return self.__repr__()
+
+    def __sub__(self, __x: float) -> 'Angle':
+        return Angle(super().__sub__(__x))
+
+    def __rsub__(self, __x: float) -> 'Angle':
+        return Angle(super().__rsub__(__x))
+
+    def __add__(self, __x: float) -> float:
+        return Angle(super().__add__(__x))
+
+    def __radd__(self, __x: float) -> float:
+        return Angle(super().__radd__(__x))
+
+    def __mul__(self, __x: float) -> float:
+        return Angle(super().__mul__(__x))
+
+    def __rmul__(self, __x: float) -> float:
+        return Angle(super().__rmul__(__x))
+
+    def __abs__(self) -> float:
+        return Angle(super().__abs__())
+
 
 PI = Angle(math.pi)
 
