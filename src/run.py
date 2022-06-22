@@ -46,7 +46,8 @@ if __name__ == '__main__':
 
     current_time = conn.space_center.ut
 
-    maneuver = injection_burn(leo, mun_orbit, 20000)
+    max_duration = timedelta(hours=4)
+    maneuver = injection_burn(leo, mun_orbit, max_duration, apoapsis=ksp_mun.equatorial_radius + 20000)
     node = vessel.control.add_node(current_time + maneuver.time_to_maneuver, maneuver.dv * 1000)
     print(f'arrival in: {maneuver.duration}')
 

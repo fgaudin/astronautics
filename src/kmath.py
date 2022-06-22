@@ -2,15 +2,15 @@ import math
 
 
 class Angle(float):
-    def __init__(self, rad=None, deg=None):
-        if not (rad or deg):
+    def __new__(cls, rad=None, deg=None):
+        if rad is None and deg is None:
             raise Exception('Either rad or deg needs to be provided')
 
-        if rad:
-            self = rad
+        if rad is not None:
+            return float.__new__(cls, rad)
         else:
-            self = math.radians(deg)
-
+            return float.__new__(cls, math.radians(deg))
+    
     @property
     def rad(self):
         return self
