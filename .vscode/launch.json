@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Unittest",
+            "type": "python",
+            "request": "launch",
+            "module": "unittest",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/src"
+        },
+        {
             "name": "Run orbital",
             "type": "python",
             "request": "launch",

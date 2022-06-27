@@ -3,3 +3,4 @@
 *.synctex.gz
 deps.gv*
 src/__pycache__/
+*.pyc

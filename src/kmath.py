@@ -66,6 +66,9 @@ class Vector:
     def magnitude(self):
         return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
 
+    def __eq__(self, __o: object) -> bool:
+        return __o.x == self.x and __o.y == self.y and __o.z == self.z
+
     def __add__(self, other: 'Vector'):
         return self.__class__(self.x + other.x, self.y + other.y, self.z + other.z)
 
