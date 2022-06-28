@@ -83,7 +83,7 @@ def compute(orbit_of_target: Orbit, target_sphere_of_influence, lambda1, r0, v0,
         
         v2 = sqrt(v1 ** 2 + vt ** 2 - 2 * v1 * vt * cos(phi1 - gamma1))
         epsilon2 = Angle(asin((vt * cos(lambda1) - v1 * cos(lambda1 + gamma1 - phi1)) / v2))
-        print(epsilon2.deg)
+        # print(epsilon2.deg)
 
         mu_t = orbit_of_target.orbiter.gravitational_parameter
         r2 = Rs
@@ -91,18 +91,18 @@ def compute(orbit_of_target: Orbit, target_sphere_of_influence, lambda1, r0, v0,
         h = r2 * v2 * sin(epsilon2)
         p = h ** 2 / mu_t
         e = sqrt(1 + 2 * E * h ** 2 / mu_t ** 2)
-        print(e)
+        #print(e)
         rp = p / (1 + e)
-        print(rp)
+        #print(rp)
 
         return rp, a0, e0, E0, E1, nu0, nu1, gamma1
 
 
 @tracked
-def injection_burn(initial_orbit: Orbit, target_orbit: Orbit, max_duration: timedelta = None, apoapsis=None):
+def injection_burn(initial_orbit: Orbit, target_orbit: Orbit, max_duration: timedelta = None, periapsis=None):
     """
     max_duration in seconds
-    apoapsis in m from center of body
+    periapsis in m from center of body
     """
     # assume initial circular orbit
     assert initial_orbit.eccentricity <= 0.002
@@ -151,11 +151,11 @@ def injection_burn(initial_orbit: Orbit, target_orbit: Orbit, max_duration: time
     
     rp = Rs
 
-    if apoapsis:
-        apoapsis_km = apoapsis / 1000
+    if periapsis:
+        periapsis_km = periapsis / 1000
         result = None
         previous_result = None
-        while rp >= apoapsis_km:
+        while rp >= periapsis_km:
             previous_result = result
             lambda1 -= Angle(deg=0.1).rad
             result = compute(target_orbit, Rs, lambda1, r0, v0, phi0)
